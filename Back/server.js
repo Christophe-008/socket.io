@@ -4,14 +4,15 @@ import http from "http";
 import { Server } from "socket.io";
 
 const app = express();
-app.use(cors());
+app.use(
+    cors({
+        origin: ["http://localhost:5173", "https://socket-io-front.vercel.app"],
+    })
+);
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: [
-            "http://localhost:5173",
-            "https://socket-io-front.vercel.app/",
-        ],
+        origin: ["http://localhost:5173", "https://socket-io-front.vercel.app"],
         methods: ["GET", "POST"],
     },
 });
